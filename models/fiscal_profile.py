@@ -5,17 +5,20 @@ class FiscalProfile(models.Model):
     _name = 'gestoria.fiscal.profile'
     _description = 'Perfil Fiscal del Cliente'
     
-    partner_id = fields.Many2one('res.partner', string = 'Cliente')
+    partner_id = fields.Many2one('res.partner', string = 'Cliente',required=True)
 
     #Tipo seleccion
-    country_code = fields.Selection([ ('ES', 'España'), ('AD', 'Andorra')])
+    country_code = fields.Selection([ ('ES', 'España'), ('AD', 'Andorra')],default='ES',
+    help='País fiscal',required=True)
+
     fiscal_year_closing_month = fields.Selection([ ('mes_de_cierre', 'Mes de cierre fiscal')])
 
     tax_regime = fields.Selection([('general', 'General'),('simplificado', 'Simplificado'),
-    ('recargo_equivalencia','Recargo de equivalencia'), ('exento', 'Exento'), ('prorrata','Prorrata')])
+    ('recargo_equivalencia','Recargo de equivalencia'), ('exento', 'Exento'), 
+    ('prorrata','Prorrata')],string='Régimen fiscal',required=True)
 
-    vat_periodicity = fields.Selection([ ('mensual', 'Mensual'), ('trimestral', 'Trimestral'), ('anual','Anual'),
-     ('no_aplica', 'no aplica')])
+    vat_periodicity = fields.Selection([ ('mensual', 'Mensual'), ('trimestral', 'Trimestral'), 
+    ('anual','Anual'), ('no_aplica', 'no aplica')])
 
     igi_periodicity = fields.Selection([ ('mensual', 'Mensual'), ('trimestral', 'Trimestral'), 
     ('semestral', 'Semestral'), ('anual', 'Anual'), ('no_aplica', 'no aplica')])
@@ -23,8 +26,8 @@ class FiscalProfile(models.Model):
     withholding_periodicity = fields.Selection([ ('mensual', 'Mensual'), ('trimestral', 'Trimestral'), 
     ('anual', 'Anual'), ('no_aplica', 'no aplica')])
 
-    tax_agency_authorization_status = fields.Selection([ ('no_solicitado', 'No solicitado'), ('solicitado', 'Solicitado'),
-     ('activo', 'Activo'), ('caducado', 'Caducado')])
+    tax_agency_authorization_status = fields.Selection([ ('no_solicitado', 'No solicitado'), 
+    ('solicitado', 'Solicitado'), ('activo', 'Activo'), ('caducado', 'Caducado')])
 
 
    #Tipo Booleano
